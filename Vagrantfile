@@ -8,16 +8,13 @@ vagrant_config = YAML.load_file("provisioning/virtualbox.conf.yml")
 
 Vagrant.configure(2) do |config|
   config.vm.box = vagrant_config['box']
+  config.disksize.size = '50GB'
 
   if Vagrant.has_plugin?("vagrant-cachier")
     # Configure cached packages to be shared between instances of the same base box.
     # More info on http://fgrehm.viewdocs.io/vagrant-cachier/usage
     config.cache.scope = :box
   end
-
-  #config.vm.synced_folder
-  config.vm.synced_folder File.expand_path("~/neutron"), "/opt/stack/neutron"
-  config.vm.synced_folder File.expand_path("~/nova"), "/opt/stack/nova"
 
   # Build the common args for the setup-base.sh scripts.
   setup_base_common_args = "#{vagrant_config['allinone']['ip']} #{vagrant_config['allinone']['short_name']}"
