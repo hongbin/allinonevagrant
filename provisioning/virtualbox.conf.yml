@@ -3,7 +3,7 @@ box: "ubuntu/xenial64"
 allinone:
   short_name: "allinone"
   host_name: "allinone.devstack.dev"
-  ip: "192.168.33.12"
+  ip: "192.168.36.12"
   memory: 8192
   cpus: 2
   vlan_interface: "eth2"

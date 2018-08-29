@@ -15,7 +15,7 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get -qqy update
 sudo mkdir -p /opt/stack
 sudo chown vagrant:vagrant /opt
 sudo chown vagrant:vagrant /opt/stack
-git clone https://git.openstack.org/openstack-dev/devstack /opt/stack/devstack
+git clone -b stable/queens https://git.openstack.org/openstack-dev/devstack /opt/stack/devstack
 
 git config --global user.name "Hongbin Lu"
 git config --global user.email hongbin.lu@huawei.com
