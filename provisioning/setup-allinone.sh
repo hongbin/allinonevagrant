@@ -29,3 +29,15 @@ DEVSTACKEOF
 
 cd /opt/stack/devstack
 ./stack.sh
+
+PACKAGES="python3-dev git-review"
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -qqy $BASE_PACKAGES
+
+ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+
+# open all security groups
+source devstack/openrc demo demo
+SG=default
+openstack security group rule create --protocol tcp --dst-port 1:65535 --remote-ip 0.0.0.0/0 $SG
+openstack security group rule create --protocol udp --dst-port 1:65535 --remote-ip 0.0.0.0/0 $SG
+openstack security group rule create --protocol icmp --dst-port -1 --remote-ip 0.0.0.0/0 $SG
