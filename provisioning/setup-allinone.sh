@@ -13,7 +13,7 @@ PHYSICAL_NETWORK=$2
 ipaddress=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f8)
 
 # Adjust local.conf
-cat << DEVSTACKEOF >> /opt/stack/devstack/local.conf
+cat << DEVSTACKEOF > /opt/stack/devstack/local.conf
 [[local|localrc]]
 # Set this host's IP
 HOST_IP=$ipaddress
@@ -24,6 +24,9 @@ DATABASE_PASSWORD=password
 RABBIT_PASSWORD=password
 SERVICE_PASSWORD=password
 SERVICE_TOKEN=password
+
+# Enable linuxbridge agent
+Q_AGENT=linuxbridge
 
 DEVSTACKEOF
 
@@ -36,7 +39,7 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get install -qqy $BASE_PACKAGES
 ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 
 # open all security groups
-source devstack/openrc demo demo
+source /opt/stack/devstack/openrc demo demo
 SG=default
 openstack security group rule create --protocol tcp --dst-port 1:65535 --remote-ip 0.0.0.0/0 $SG
 openstack security group rule create --protocol udp --dst-port 1:65535 --remote-ip 0.0.0.0/0 $SG
