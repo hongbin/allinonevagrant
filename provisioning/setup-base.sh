@@ -18,7 +18,7 @@ sudo chown vagrant:vagrant /opt/stack
 git clone https://git.openstack.org/openstack-dev/devstack /opt/stack/devstack
 
 git config --global user.name "Hongbin Lu"
-git config --global user.email hongbin.lu@huawei.com
+git config --global user.email hongbin034@gmail.com
 
 echo "vagrant:huawei" | sudo chpasswd
 sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
